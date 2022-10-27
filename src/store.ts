@@ -1,9 +1,13 @@
 import create from "zustand";
+import { v4 as uuidv4 } from "uuid";
+import { getQuotes } from "./components/getQuotes";
 
 type DreamStoreType = {
   dreams: number;
+  randomQuote: string;
   haveADream: () => void;
   loseADream: () => void;
+  lucidDream: () => void;
 };
 
 type DescriptionStoreType = {
@@ -12,23 +16,46 @@ type DescriptionStoreType = {
 };
 
 type Entry = {
-  id: number;
+  id: string;
   description: string;
   author: string;
 };
 
-const useDreamStore = create<DreamStoreType>((set) => ({
+const options = {
+  method: "GET",
+  url: "https://famous-quotes4.p.rapidapi.com/random",
+  params: { category: "imagination", count: "20" },
+  headers: {
+    "X-RapidAPI-Key": "c70b672410msh4c10651c3c3fcb3p15b0a1jsna9ed39756583",
+    "X-RapidAPI-Host": "famous-quotes4.p.rapidapi.com",
+  },
+};
+
+const useDreamStore = create<DreamStoreType>((set, get) => ({
   dreams: 11,
+  randomQuote: "",
   haveADream: () => set((state) => ({ dreams: state.dreams + 1 })),
   loseADream: () => set((state) => ({ dreams: state.dreams - 1 })),
+  lucidDream: async () => {
+    const theDream = get().dreams;
+    const response = await getQuotes();
+    set({
+      randomQuote: response[theDream as keyof typeof response].text,
+    });
+  },
 }));
 
 const useDescriptionStore = create<DescriptionStoreType>((set) => ({
   entries: [
     {
-      id: 9,
-      description: "all the clowns were juggling in the distance",
+      id: "9",
+      description: "All the clowns were juggling in the distance",
       author: "Simon",
+    },
+    {
+      id: "10",
+      description: "I forgot my own name",
+      author: "Shawny",
     },
   ],
   setNewEntry: (description: string, author: string) => {
@@ -36,7 +63,7 @@ const useDescriptionStore = create<DescriptionStoreType>((set) => ({
       entries: [
         ...state.entries,
         {
-          id: 2,
+          id: uuidv4(),
           description,
           author,
         },

@@ -1,6 +1,23 @@
-import { Box, Text, Heading } from "@chakra-ui/react";
+import { useState } from "react";
+import { Box, UnorderedList, Heading, Button, Flex } from "@chakra-ui/react";
+import { useDescriptionStore } from "../store";
+import JournalEntry from "./JournalEntry";
+import AddEntryModal from "./AddEntryModal";
 
 const JournalEntries = () => {
+  const [showModal, setShowModal] = useState(false);
+  const { entries } = useDescriptionStore((state) => state);
+
+  const entriesList = entries.map((entry) => {
+    return (
+      <JournalEntry
+        id={entry.id}
+        description={entry.description}
+        author={entry.author}
+      />
+    );
+  });
+
   return (
     <Box
       pl={10}
@@ -12,19 +29,33 @@ const JournalEntries = () => {
       mr="auto"
       ml="auto"
     >
-      <Heading color="white" size="sm" fontWeight="bold" m="auto">
-        Journal Entries
-      </Heading>
+      {showModal && <AddEntryModal closeModal={() => setShowModal(false)} />}
+      <Flex w="60%">
+        <Heading color="white" size="sm" fontWeight="bold">
+          journal entries
+        </Heading>
+        <Button
+          variant="solid"
+          colorScheme="cyan"
+          _hover={{ bgColor: "cyan" }}
+          ml="auto"
+          size="sm"
+          fontWeight="bold"
+          onClick={() => setShowModal(true)}
+        >
+          Add an entry
+        </Button>
+      </Flex>
       <Box
         mt={5}
         maxW="sm"
         borderWidth="1px"
         borderRadius="lg"
-        bgColor="white"
-        h={20}
+        bgColor="black"
+        h={40}
         w="full"
       >
-        <Text color="purple.300">Text text text </Text>
+        <UnorderedList m={0}>{entriesList}</UnorderedList>
       </Box>
     </Box>
   );

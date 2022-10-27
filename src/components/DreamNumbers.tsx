@@ -1,11 +1,14 @@
-import React from "react";
-import { Flex, Text, IconButton } from "@chakra-ui/react";
+import { Flex, Text, IconButton, Button } from "@chakra-ui/react";
 import { useDreamStore } from "../store";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import DreamCount from "./DreamCount";
 
 const DreamNumbers = () => {
-  const { haveADream, loseADream } = useDreamStore((state: any) => state);
+  const { haveADream, loseADream, lucidDream, randomQuote } = useDreamStore(
+    (state) => state
+  );
+
+  console.log(randomQuote);
 
   return (
     <Flex
@@ -18,20 +21,25 @@ const DreamNumbers = () => {
       justifyContent="center"
       gap={4}
     >
-      <Text color="white" fontSize="xl">
-        Dream Counter:
+      <Text color="white" fontSize="xl" fontWeight="bold">
+        dream counter:
       </Text>
       <DreamCount />
       <IconButton
+        size="sm"
         aria-label="Add a dream"
         icon={<AddIcon />}
         onClick={haveADream}
       />
       <IconButton
+        size="sm"
         aria-label="Add a dream"
         icon={<MinusIcon />}
         onClick={loseADream}
       />
+      <Button onClick={lucidDream} size="sm">
+        mystery
+      </Button>
     </Flex>
   );
 };
