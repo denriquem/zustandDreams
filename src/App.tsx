@@ -1,26 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Header from "./components/Header";
+import Description from "./components/Description";
+import DreamNumbers from "./components/DreamNumbers";
+import { Flex, Box } from "@chakra-ui/react";
+import JournalEntries from "./components/JournalEntries";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box bgColor="black" h="100vh">
+      <Header />
+      <Flex flexDir="column" gap={5}>
+        <Description />
+        <DreamNumbers />
+      </Flex>
+      <JournalEntries />
+    </Box>
   );
-}
+};
 
 export default App;
