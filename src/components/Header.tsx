@@ -13,7 +13,7 @@ const Header = () => {
       h="10%"
       backdropFilter="saturate(180%) blur(5px)"
     >
-      <Heading m="auto" fontSize="2xl">
+      <Heading m="auto" fontSize="3xl">
         Zustand Dreams
       </Heading>
     </Flex>

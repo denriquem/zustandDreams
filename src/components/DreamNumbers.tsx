@@ -1,6 +1,6 @@
-import { Flex, Text, IconButton, Button } from "@chakra-ui/react";
+import { Flex, Text, IconButton } from "@chakra-ui/react";
 import { useDreamStore } from "../store";
-import { AddIcon, MinusIcon } from "@chakra-ui/icons";
+import { AddIcon, MinusIcon, QuestionIcon } from "@chakra-ui/icons";
 import DreamCount from "./DreamCount";
 
 const DreamNumbers = () => {
@@ -30,16 +30,23 @@ const DreamNumbers = () => {
         aria-label="Add a dream"
         icon={<AddIcon />}
         onClick={haveADream}
+        bgColor="white"
       />
       <IconButton
         size="sm"
         aria-label="Add a dream"
         icon={<MinusIcon />}
         onClick={loseADream}
+        bgColor="white"
       />
-      <Button onClick={lucidDream} size="sm">
-        mystery
-      </Button>
+      <IconButton
+        onClick={lucidDream}
+        size="sm"
+        aria-label="Questions"
+        icon={<QuestionIcon />}
+        color="purple.500"
+        bgColor="white"
+      />
     </Flex>
   );
 };

@@ -11,8 +11,8 @@ const App = () => {
       <Flex flexDir="column" gap={5}>
         <Description />
         <DreamNumbers />
+        <JournalEntries />
       </Flex>
-      <JournalEntries />
     </Box>
   );
 };

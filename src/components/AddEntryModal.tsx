@@ -23,7 +23,6 @@ const AddEntryModal = ({ closeModal }: AddEntryModalProps) => {
   const { setNewEntry } = useDescriptionStore((state) => state);
 
   const addEntry = () => {
-    console.log(value);
     setNewEntry(value, "Jim");
     closeModal();
   };
@@ -32,7 +31,7 @@ const AddEntryModal = ({ closeModal }: AddEntryModalProps) => {
     <Modal isOpen onClose={closeModal} isCentered>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Write Your Entry</ModalHeader>
+        <ModalHeader>Write your entry</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Input

@@ -21,18 +21,8 @@ type Entry = {
   author: string;
 };
 
-const options = {
-  method: "GET",
-  url: "https://famous-quotes4.p.rapidapi.com/random",
-  params: { category: "imagination", count: "20" },
-  headers: {
-    "X-RapidAPI-Key": "c70b672410msh4c10651c3c3fcb3p15b0a1jsna9ed39756583",
-    "X-RapidAPI-Host": "famous-quotes4.p.rapidapi.com",
-  },
-};
-
 const useDreamStore = create<DreamStoreType>((set, get) => ({
-  dreams: 11,
+  dreams: 3,
   randomQuote: "",
   haveADream: () => set((state) => ({ dreams: state.dreams + 1 })),
   loseADream: () => set((state) => ({ dreams: state.dreams - 1 })),
