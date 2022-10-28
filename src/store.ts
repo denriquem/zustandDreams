@@ -20,7 +20,6 @@ type DescriptionStoreType = {
 type Entry = {
   id: string;
   description: string;
-  author: string;
 };
 
 const useDreamStore = create<DreamStoreType>((set, get) => ({
@@ -46,22 +45,15 @@ const useDescriptionStore = create<
       {
         id: "9",
         description: "All the clowns were juggling in the distance",
-        author: "Simon",
-      },
-      {
-        id: "10",
-        description: "I forgot my own name",
-        author: "Shawny",
       },
     ],
-    setNewEntry: (description: string, author: string) => {
+    setNewEntry: (description: string) => {
       set((state) => ({
         entries: [
           ...state.entries,
           {
             id: uuidv4(),
             description,
-            author,
           },
         ],
       }));

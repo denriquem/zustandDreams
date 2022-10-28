@@ -14,7 +14,6 @@ const JournalEntries = () => {
         key={entry.id}
         id={entry.id}
         description={entry.description}
-        author={entry.author}
       />
     );
   });

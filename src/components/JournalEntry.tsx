@@ -5,10 +5,9 @@ import { useDescriptionStore } from "../store";
 interface JournalEntryProps {
   id: string;
   description: string;
-  author: string;
 }
 
-const JournalEntry = ({ id, description, author }: JournalEntryProps) => {
+const JournalEntry = ({ id, description }: JournalEntryProps) => {
   const { removeEntry } = useDescriptionStore((state) => state);
 
   return (
