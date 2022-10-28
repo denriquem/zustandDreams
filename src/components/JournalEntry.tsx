@@ -1,5 +1,5 @@
 import React from "react";
-import { ListItem, Button } from "@chakra-ui/react";
+import { ListItem, Button, Flex } from "@chakra-ui/react";
 import { useDescriptionStore } from "../store";
 
 interface JournalEntryProps {
@@ -24,10 +24,19 @@ const JournalEntry = ({ id, description, author }: JournalEntryProps) => {
       color="white"
       fontWeight="bold"
     >
-      {description}
-      <Button variant="sm" onClick={() => removeEntry(id)}>
-        delete
-      </Button>
+      <Flex alignItems="center">
+        {description}
+        <Button
+          color="red.200"
+          variant="sm"
+          onClick={() => removeEntry(id)}
+          ml="auto"
+          pr={4}
+          _hover={{ color: "red.300" }}
+        >
+          delete
+        </Button>
+      </Flex>
     </ListItem>
   );
 };
