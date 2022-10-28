@@ -28,7 +28,10 @@ const JournalEntries = () => {
         <Button
           variant="solid"
           colorScheme="orange"
-          _hover={{ bgColor: "orange.300" }}
+          _hover={{
+            boxShadow: "0px 0px 0px 4px rgba(237,137,54, 0.4)",
+            color: "black",
+          }}
           size="sm"
           fontWeight="bold"
           ml="auto"

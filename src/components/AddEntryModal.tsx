@@ -43,7 +43,7 @@ const AddEntryModal = ({ closeModal }: AddEntryModalProps) => {
         </ModalBody>
         <ModalFooter>
           <Button
-            colorScheme="black"
+            colorScheme="blue"
             mr={3}
             size="sm"
             variant="outline"
@@ -51,7 +51,7 @@ const AddEntryModal = ({ closeModal }: AddEntryModalProps) => {
           >
             Close
           </Button>
-          <Button colorScheme="blackAlpha" size="sm" onClick={addEntry}>
+          <Button colorScheme="blue" size="sm" onClick={addEntry}>
             Add
           </Button>
         </ModalFooter>

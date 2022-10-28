@@ -1,5 +1,5 @@
 import React from "react";
-import { ListItem, Button, Flex } from "@chakra-ui/react";
+import { ListItem, Button, Flex, Box } from "@chakra-ui/react";
 import { useDescriptionStore } from "../store";
 
 interface JournalEntryProps {
@@ -24,7 +24,7 @@ const JournalEntry = ({ id, description }: JournalEntryProps) => {
       fontWeight="bold"
     >
       <Flex alignItems="center">
-        {description}
+        <Box maxW="370px">{description}</Box>
         <Button
           color="red.200"
           variant="sm"

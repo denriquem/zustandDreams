@@ -7,11 +7,12 @@ const Description = () => {
       <Text
         color="white"
         fontSize="lg"
-        p={10}
+        py={10}
+        pl={10}
         fontWeight="bold"
         textAlign="center"
       >
-        The first and hopefully last zustand based interactive dream journal.
+        The first and hopefully last zustand fuelled interactive dream journal.
       </Text>
     </Box>
   );

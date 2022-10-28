@@ -5,7 +5,7 @@ import { persist } from "zustand/middleware";
 
 type DreamStoreType = {
   dreams: number;
-  randomQuote: string;
+  randomQuotes: string[];
   haveADream: () => void;
   loseADream: () => void;
   lucidDream: () => void;
@@ -24,15 +24,12 @@ type Entry = {
 
 const useDreamStore = create<DreamStoreType>((set, get) => ({
   dreams: 3,
-  randomQuote: "",
+  randomQuotes: [],
   haveADream: () => set((state) => ({ dreams: state.dreams + 1 })),
   loseADream: () => set((state) => ({ dreams: state.dreams - 1 })),
   lucidDream: async () => {
-    const theDream = get().dreams;
     const response = await getQuotes();
-    set({
-      randomQuote: response[theDream as keyof typeof response].text,
-    });
+    set({ randomQuotes: await response });
   },
 }));
 
