@@ -1,5 +1,6 @@
 import React from "react";
-import { ListItem } from "@chakra-ui/react";
+import { ListItem, Button } from "@chakra-ui/react";
+import { useDescriptionStore } from "../store";
 
 interface JournalEntryProps {
   id: string;
@@ -8,6 +9,8 @@ interface JournalEntryProps {
 }
 
 const JournalEntry = ({ id, description, author }: JournalEntryProps) => {
+  const { removeEntry } = useDescriptionStore((state) => state);
+
   return (
     <ListItem
       borderWidth={4}
@@ -22,6 +25,9 @@ const JournalEntry = ({ id, description, author }: JournalEntryProps) => {
       fontWeight="bold"
     >
       {description}
+      <Button variant="sm" onClick={() => removeEntry(id)}>
+        delete
+      </Button>
     </ListItem>
   );
 };

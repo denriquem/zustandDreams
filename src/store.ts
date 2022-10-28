@@ -1,6 +1,7 @@
 import create from "zustand";
 import { v4 as uuidv4 } from "uuid";
 import { getQuotes } from "./components/getQuotes";
+import { persist } from "zustand/middleware";
 
 type DreamStoreType = {
   dreams: number;
@@ -13,6 +14,7 @@ type DreamStoreType = {
 type DescriptionStoreType = {
   entries: Entry[];
   setNewEntry: (text: string, author: string) => void;
+  removeEntry: (id: string) => void;
 };
 
 type Entry = {
@@ -35,31 +37,44 @@ const useDreamStore = create<DreamStoreType>((set, get) => ({
   },
 }));
 
-const useDescriptionStore = create<DescriptionStoreType>((set) => ({
-  entries: [
-    {
-      id: "9",
-      description: "All the clowns were juggling in the distance",
-      author: "Simon",
+const useDescriptionStore = create<
+  DescriptionStoreType,
+  [["zustand/persist", DescriptionStoreType]]
+>(
+  persist((set, get) => ({
+    entries: [
+      {
+        id: "9",
+        description: "All the clowns were juggling in the distance",
+        author: "Simon",
+      },
+      {
+        id: "10",
+        description: "I forgot my own name",
+        author: "Shawny",
+      },
+    ],
+    setNewEntry: (description: string, author: string) => {
+      set((state) => ({
+        entries: [
+          ...state.entries,
+          {
+            id: uuidv4(),
+            description,
+            author,
+          },
+        ],
+      }));
     },
-    {
-      id: "10",
-      description: "I forgot my own name",
-      author: "Shawny",
+    removeEntry: (id: string) => {
+      const isRelevantIndex = (element: Entry) => element.id === id;
+      const indexToBeRemoved = get().entries.findIndex(isRelevantIndex);
+      get().entries.splice(indexToBeRemoved, 1);
+      set((state) => ({
+        entries: state.entries,
+      }));
     },
-  ],
-  setNewEntry: (description: string, author: string) => {
-    set((state) => ({
-      entries: [
-        ...state.entries,
-        {
-          id: uuidv4(),
-          description,
-          author,
-        },
-      ],
-    }));
-  },
-}));
+  }))
+);
 
 export { useDreamStore, useDescriptionStore };
