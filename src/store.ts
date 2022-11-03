@@ -22,7 +22,7 @@ type Entry = {
   description: string;
 };
 
-const useDreamStore = create<DreamStoreType>((set, get) => ({
+const useDreamStore = create<DreamStoreType>((set) => ({
   dreams: 3,
   randomQuotes: [],
   haveADream: () => set((state) => ({ dreams: state.dreams + 1 })),
